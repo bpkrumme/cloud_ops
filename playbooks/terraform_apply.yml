@@ -5,7 +5,7 @@
   tasks:
     - name: Sync the terraform project directory
       ansible.builtin.git:
-        repo: https://github.com/{{terraform_namespace}}/{{ terraform_project }}
+        repo: https://github.com/{{ terraform_namespace }}/{{ terraform_project }}
         dest: /tmp/{{ terraform_project }}
     - name: Run our terraform plan
       cloud.terraform.terraform:
