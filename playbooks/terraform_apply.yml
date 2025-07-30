@@ -1,6 +1,6 @@
 ---
 - name: Apply Terraform Plan from a Git Repository
-  hosts: "{{ tf_controller | default('workstation') }}"
+  hosts: all
   become: false
   vars:
     aws:
