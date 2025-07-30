@@ -1,0 +1,14 @@
+---
+- name: Apply Terraform Plan from a Git Repository
+  hosts: localhost
+  become: false
+  tasks:
+    - name: Sync the terraform project directory
+      ansible.builtin.git:
+        repo: https://github.com/{{ terraform_namespace }}/{{ terraform_project }}
+        dest: /tmp/{{ terraform_project }}
+    - name: Run our terraform plan
+      cloud.terraform.terraform:
+        project_path: /tmp/{{ terraform_project }}
+        state: absent
+        force_init: true
