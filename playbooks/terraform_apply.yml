@@ -1,0 +1,19 @@
+---
+- name: Apply Terraform Plan from a Git Repository
+  hosts: "{{ tf_controller | default('workstation') }}"
+  become: false
+  vars:
+    aws:
+      access_key: '{{ lookup("env", "AWS_ACCESS_KEY_ID") }}'
+      secret_key: '{{ lookup("env", "AWS_SECRET_ACCESS_KEY") }}'
+      security_token: '{{ lookup("env", "AWS_SECURITY_TOKEN") }}'
+  tasks:
+    - name: Run our terraform plan
+      cloud.terraform.terraform:
+        project_path: /home/bkrumme/terraformprojects/{{ terraform_project }}
+        state: present
+      check_mode: True
+      register: tf_output
+    - name: show tf_output
+      ansible.builtin.debug:
+        msg: "{{ tf_output }}"
