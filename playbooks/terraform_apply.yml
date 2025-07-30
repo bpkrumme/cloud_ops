@@ -10,8 +10,9 @@
   tasks:
     - name: Run our terraform plan
       cloud.terraform.terraform:
-        project_path: /home/bkrumme/terraformprojects/{{ terraform_project }}
+        project_path: /home/bkrumme/terraformprojects/{{ terraform_project }}/
         state: present
+        force_init: True
       check_mode: True
       register: tf_output
     - name: show tf_output
