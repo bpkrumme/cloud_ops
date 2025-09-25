@@ -1,5 +1,5 @@
 ---
-- name: Apply Terraform Plan from a Git Repository
+- name: Destroy Terraform Plan from a Git Repository
   hosts: localhost
   become: false
   tasks:
@@ -7,7 +7,7 @@
       ansible.builtin.git:
         repo: https://github.com/{{ terraform_namespace }}/{{ terraform_project }}
         dest: /tmp/{{ terraform_project }}
-    - name: Run our terraform plan
+    - name: Run terraform destroy
       cloud.terraform.terraform:
         project_path: /tmp/{{ terraform_project }}
         state: absent

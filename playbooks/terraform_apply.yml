@@ -7,7 +7,7 @@
       ansible.builtin.git:
         repo: https://github.com/{{ terraform_namespace }}/{{ terraform_project }}
         dest: /tmp/{{ terraform_project }}
-    - name: Run our terraform plan
+    - name: Run terraform apply
       cloud.terraform.terraform:
         project_path: /tmp/{{ terraform_project }}
         state: present
